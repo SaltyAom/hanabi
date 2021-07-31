@@ -1,0 +1,108 @@
+$easeOutQuart: cubic-bezier(0.25, 1, 0.5, 1)
+$easeOutExpo: cubic-bezier(0.16, 1, 0.3, 1)
+
+.batch
+    @apply absolute text-black m-0 text-3xl opacity-0
+    transform: scale(.5)
+    writing-mode: vertical-lr
+    text-orientation: upright
+
+    @media (max-height: 568px)
+        @apply text-2xl
+
+    @media (max-height: 380px)
+        @apply text-xl
+
+
+.batch.--active
+    @apply z-10 opacity-100
+    transform: scale(1)
+    animation: active-in 1.92s $easeOutQuart
+
+.batch.--fading-out
+    @apply pointer-events-none
+    animation: active-out .96s $easeOutExpo
+    transition: unset
+
+@keyframes active-in
+    from
+        @apply z-10 opacity-0
+        transform: scale(.5)
+
+    to
+        @apply z-10 opacity-100
+        transform: scale(1)
+
+@keyframes active-out
+    from
+        @apply z-10 opacity-100
+        transform: scale(1)
+
+    to
+        @apply z-10 opacity-0
+        transform: scale(2)
+
+#progress-bar
+    @apply flex flex-col justify-start relative bg-gray-200 rounded mb-4 overflow-hidden
+    width: 3px
+    max-height: calc(90vh - 120px)
+    height: 320px
+
+#progress-bar.--animation
+    animation: progress-gravity 8.5s linear 0s infinite
+
+@keyframes progress-gravity
+    0%
+        @apply justify-start
+
+    92.49%
+        @apply justify-start
+
+    92.5%
+        @apply justify-end
+
+    100%
+        @apply justify-end
+
+#progress
+    @apply bg-black rounded
+    width: 100%
+    height: 0
+
+#progress.--animation
+    animation: progress 8.5s linear 0s infinite
+    
+@keyframes progress
+    0%
+        height: 0
+
+    92.5%
+        height: 100%
+
+    97.5%
+        height: 0
+
+#next, #previous
+    @apply flex justify-center items-center appearance-none border-0 bg-transparent border-2 border-solid border-transparent cursor-pointer
+    width: 48px
+    height: 48px
+    transition: border-color .16s $easeOutQuart
+
+    &:hover,
+    &:focus
+        @apply border-gray-300
+
+#next
+    @apply mt-1
+
+#music
+    @apply fixed flex justify-center items-center text-black rounded border border-solid border-transparent no-underline
+    bottom: 16px
+    right: 16px
+    width: 42px
+    height: 42px
+    transition: border-color .16s ease-out
+
+    &:focus,
+    &:hover
+        @apply border-black
