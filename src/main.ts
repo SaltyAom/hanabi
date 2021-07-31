@@ -28,6 +28,10 @@ const useState = <T extends unknown>(init: T) => {
     return [getValue, update, onUpdate] as const
 }
 
+document.addEventListener('touchstart', () => null, {
+    passive: true
+})
+
 const main = () => {
     let previous = id('previous')!
     let next = id('next')!
